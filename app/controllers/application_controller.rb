@@ -9,7 +9,11 @@ class App < Sinatra::Base
   end
   
   post "/teams" do
-    @heroes = Hero.new(params[:hero])
+    @team = Team.new(params[:team])
+    
+    params[:team][:hero].each do |info|
+      Hero.new(info)
+    end
     erb :"../views/team"
   end
   
@@ -20,3 +24,16 @@ class App < Sinatra::Base
 end
 
 
+    post "/pirates" do
+      # @pirate = Pirate.new(params[:pirate.name], params[:weight], params[:height]) # doesn't work
+      # get a single pirate's information ready
+      @pirate = Pirate.new(params[:pirate])
+      
+      # pirate can have ships
+      @ships = []
+      params[:pirate][:ships].each do |info|
+        @ships << Ship.new(info)
+      end
+      
+      erb :"pirates/show"
+    end
