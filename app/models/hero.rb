@@ -1,6 +1,6 @@
 class Hero
   
-  attr_accessor :name, :power, :biography
+  attr_accessor :name, :power, :bio
   @@all = []
   
   def initialize (params)
